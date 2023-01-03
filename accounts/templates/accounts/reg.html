@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>form</title>
+	</head>
+	<body>
+		<form action="{% url 'accounts:register' %}">
+			<table>
+				<th>SIGN UP FORM</th>
+				
+				<tr>
+					<td>NAME :</td>
+					<td>{{form.Name}}</td>
+				</tr>
+
+				<tr>
+					<td>ADM NUMBER :</td>
+					<td>{{form.Role_number}}</td>
+				</tr>
+				<tr>
+					<td>DEPT</td>
+					<td>{{form.Dept_id}}</td>
+                                </tr>
+				<tr>
+					<td>EMAIL :</td>
+					<td>{{form.Email}}</td>
+				</tr>
+				<tr>
+					<td>ENTER PASSWORD :</td>
+					<td>{{form.password1}}</td>
+				</tr>
+				<tr>
+					<td>CONFIRM PASSWORD</td>
+					<td>{{form.password2}}</td>
+				</tr>
+
+				<tr>
+					<td><button type="submit">Submit</button></td>
+					<td><button type="clear">Clear</button></td>
+				</tr>
+			</table>
+
+
+	</body>
+</html>
+
