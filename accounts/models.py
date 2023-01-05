@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,Permissi
 
 
 
-class DepartmentManager(models.Manager):
+class DepartmentManager(BaseUserManager):
 
     def add_dept(self,Dept_id,DEPT_NAME):
         if not Dept_id and DEPT_NAME:
@@ -27,15 +27,15 @@ class Departments(models.Model):
     DEPT_NAME = models.CharField(max_length=255)
     objects = DepartmentManager()
 
-
-
-
-
-
-class MyUserManager(models.Manager):
-
     def __str__(self):
-        return Name
+        return f"DEPT ID:{self.Dept_id} \n DEPT NAME:{self.DEPT_NAME} "
+
+
+
+
+
+
+class MyUserManager(BaseUserManager):
 
 
 
@@ -92,9 +92,8 @@ class MyUsers(AbstractBaseUser,PermissionsMixin):
 
     #role number can be adimission or the staff id(super user)
     Role_number = models.CharField(max_length=255,unique=True,primary_key=True)
-    #DEPT ID TO BE RELATED WITH DEPT TABLE
-
-    Dept_id = models.CharField(max_length=255)
+    
+    Dept_id = models.ForeignKey(Departments,on_delete=models.PROTECT,blank=True,null=True)
     Email = models.EmailField(max_length=255,unique=True)
     Vote_status = models.BooleanField(default=False)
     is_candidate = models.BooleanField(default=False)
@@ -127,7 +126,7 @@ class MyUsers(AbstractBaseUser,PermissionsMixin):
 
 
     
-class MyCandidateManager(models.Manager):
+class MyCandidateManager(BaseUserManager):
 
 
 
@@ -150,7 +149,7 @@ class MyCandidateManager(models.Manager):
 
 class Candidates(models.Model):
 
-    Role_number = models.OneToOneField(MyUsers,on_delete=models.PROTECT,primary_key=True)
+    Role_number = models.OneToOneField(MyUsers,on_delete=models.DO_NOTHING,primary_key=True)
     Position = models.CharField(max_length=255)
     Votes = models.IntegerField(default=0)
 

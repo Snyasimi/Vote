@@ -12,9 +12,10 @@ class MyUserCreationForm(UserCreationForm):
 
 
 
-class VotingForm(ModelForm):
-   # password1 = models.CharField(max_length=255)
-    pass
+class Candidate_RegForm(forms.Form):
+    Role_number = forms.CharField(max_length=50)
+    Position = forms.CharField(max_length = 50)
+    
 
  
 
