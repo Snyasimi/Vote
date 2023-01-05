@@ -1,0 +1,34 @@
+<!DOCTYPE html >
+<html lang="en">
+	<head>
+		<title>Candidate registration</title>
+	</head>
+	<body>
+		<form method = "POST" action="{% url 'accounts:Reg_candidate' %}">
+			{% csrf_token %}
+		<table>
+			<th>CANDIDATE REGISTRATION</th>
+			<tr>
+				<td>ROLE_NUMBER</td>
+				<td>{{ Reg_form.Role_number }}</td>
+			</tr>
+
+			<tr>
+				<td>POSITION</td>
+				<td>{{ Reg_form.Position }}</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">Submit</button>
+				</td>
+				
+				<td>
+					<button type="clear">Clear</button>
+				</td>
+			</tr>
+
+		</table>
+	</body>
+</html>
+
+
