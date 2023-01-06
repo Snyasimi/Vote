@@ -1,7 +1,24 @@
 from django.shortcuts import render
 from .forms import MyUserCreationForm,Candidate_RegForm
 from .models import MyUsers,MyUserManager,Candidates,MyCandidateManager
+
+from django.views.generic import ListView
+
+
 # Create your views here.
+
+class CandidateView(ListView):
+
+    model = Candidates
+    template_name = "accounts/CandidateList.html"
+    context_object_name = "Candidates"
+
+    def get_queryset(self):
+        #TODO Filter by the users Department to see the candidates of same dept 
+        return Candidates.objects.all()
+
+
+
 
 def register(request):
 
