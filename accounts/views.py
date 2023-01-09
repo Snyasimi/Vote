@@ -3,7 +3,7 @@ from .forms import MyUserCreationForm,Candidate_RegForm
 from .models import MyUsers,MyUserManager,Candidates,MyCandidateManager
 
 from django.views.generic import ListView
-
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
 # Create your views here.
 
@@ -18,8 +18,29 @@ class CandidateView(ListView):
         return Candidates.objects.all()
 
 
+class CreateUser(CreateView):
+    model = MyUsers
+    form_class = MyUserCreationForm
+    template_name = "accounts/reg.html"
+    #TODO INSERT REDIRECT URL 
+    success_url = "/"
 
 
+class CreateCandidate(CreateView):
+    model = Candidates
+    form_class = Candidate_RegForm
+    template_name = "accounts/Candidate_reg.html"
+    #TODO INSERT REDIRECT URL
+    success_url = "/"
+
+    def form_valid(self,form):
+
+        form.instance.Role_number = self.request.user
+
+        return super.form_valid(form)
+
+
+"""
 def register(request):
 
     if request.method == "POST":
@@ -60,4 +81,4 @@ def Register_candidate(request):
 
     #The template for this function is not created yet
     return(render(request,'accounts/Candidate_reg.html',context))
-
+"""
